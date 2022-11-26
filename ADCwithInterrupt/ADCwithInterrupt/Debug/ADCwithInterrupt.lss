@@ -198,11 +198,12 @@ ISR(ADC_vect) {
   fe:	90 93 15 01 	sts	0x0115, r25	; 0x800115 <__data_end+0x1>
  102:	80 93 14 01 	sts	0x0114, r24	; 0x800114 <__data_end>
 	
-	if (adcValue > 400) {
+	// 5k 저항 사용 
+	if (adcValue > 700) {
  106:	80 91 14 01 	lds	r24, 0x0114	; 0x800114 <__data_end>
  10a:	90 91 15 01 	lds	r25, 0x0115	; 0x800115 <__data_end+0x1>
- 10e:	81 39       	cpi	r24, 0x91	; 145
- 110:	91 40       	sbci	r25, 0x01	; 1
+ 10e:	8d 3b       	cpi	r24, 0xBD	; 189
+ 110:	92 40       	sbci	r25, 0x02	; 2
  112:	1c f0       	brlt	.+6      	; 0x11a <__vector_21+0x36>
 		PORTB = 0x01;
  114:	81 e0       	ldi	r24, 0x01	; 1

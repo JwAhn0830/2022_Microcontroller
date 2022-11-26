@@ -40,7 +40,8 @@ ISR(ADC_vect) {
 	ADCSRA |= ( 1 << ADSC);
 	adcValue = ADC;
 	
-	if (adcValue > 400) {
+	// 5k 저항 사용 
+	if (adcValue > 700) {
 		PORTB = 0x01;
 	}
 	else {
