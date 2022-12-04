@@ -15,17 +15,17 @@ volatile int count = 0;
 ISR(TIMER0_OVF_vect) {
 	count++;
 	
-	if (count >= 32) {
+	if (count >= 122) { // 0.5s
 		count = 0;
-		PORTC = PORTC ^ 0x08;	
+		PORTB = PORTB ^ 0x01;	
 	}
 }
 int main(void)
 {
-	DDRC = 0xFF;
-    PORTC = 0x00;
+	DDRB = 0x01;
+    PORTB |= 0x01;
 	
-	TCCR0 |= (1 << CS02) | (1 << CS01) | (1 << CS00); // clock soucre == 1024	
+	TCCR0 |= (1 << CS02) | (1 << CS01); // clock soucre == 256	
 	TIMSK |= (1 << TOIE0); // Overflow interrupt enable	
 	sei(); // global interrupt enable
     while (1) 
